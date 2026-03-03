@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prepaid Load</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header d-flex flex-column justify-content-center align-items-center">
+                <h4>Prepaid Load</h4>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="telcoProvider" class="form-label">TelCo Provider:</label>
+                    <select id="telcoProvider" class="form-select">
+                        <option value="">Select Provider</option>
+                        <option value="smart">Smart</option>
+                        <option value="globe">Globe</option>
+                        <option value="dito">Dito</option>
+                        <option value="tnt">TNT</option>
+                        <option value="tm">TM</option>
+                        <option value="gomo">GOMO</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Load Amount:</label>
+                    <div id="loadOptions"></div>
+                    <input type="number" id="otherAmount" class="form-control mt-2" placeholder="Enter custom amount" disabled>
+                </div>
+
+                <div class="mb-3">
+                    <label for="totalAmount" class="form-label">Total Amount:</label>
+                    <input type="text" id="totalAmount" class="form-control" readonly>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/jquery-4.0.0.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script>
+        const loadAmounts = {
+            smart: [50, 100, 200, 500],
+            globe: [55, 110, 220, 550],
+            dito: [50, 100, 200, 500],
+            tnt: [50, 100, 200, 500],
+            tm: [50, 100, 200, 500],
+            gomo: [99, 199, 499, 999]
+        };
+
+        const CONVENIENCE_CHARGE = 2.50;
+
+        $(document).ready(function() {
+            $('#telcoProvider').change(function() {
+                const provider = $(this).val();
+                const loadOptions = $('#loadOptions');
+                loadOptions.empty();
+                $('#otherAmount').val('').prop('disabled', true);
+                $('#totalAmount').val('');
+
+                if (provider) {
+                    loadAmounts[provider].forEach(amount => {
+                        loadOptions.append(`
+                            <div class="form-check">
+                                <input class="form-check-input load-radio" type="radio" name="loadAmount" value="${amount}" id="load_${amount}">
+                                <label class="form-check-label" for="load_${amount}">₱${amount}</label>
+                            </div>
+                        `);
+                    });
+                    loadOptions.append(`
+                        <div class="form-check">
+                            <input class="form-check-input load-radio" type="radio" name="loadAmount" value="other" id="load_other">
+                            <label class="form-check-label" for="load_other">Others</label>
+                        </div>
+                    `);
+                }
+            });
+
+            $(document).on('change', '.load-radio', function() {
+                const value = $(this).val();
+                if (value === 'other') {
+                    $('#otherAmount').prop('disabled', false).focus();
+                    $('#totalAmount').val('');
+                } else {
+                    $('#otherAmount').val('').prop('disabled', true);
+                    const total = parseFloat(value) + CONVENIENCE_CHARGE;
+                    $('#totalAmount').val('₱' + total.toFixed(2));
+                }
+            });
+
+            $(document).on('input', '#otherAmount', function() {
+                const amount = parseFloat($(this).val());
+                const provider = $('#telcoProvider').val();
+                const maxAmount = Math.max(...loadAmounts[provider]);
+
+                if (!isNaN(amount) && amount > 0 && amount < maxAmount) {
+                    const nearest = loadAmounts[provider].reduce((prev, curr) => 
+                        Math.abs(curr - amount) < Math.abs(prev - amount) ? curr : prev
+                    );
+                    $(`#load_${nearest}`).prop('checked', true);
+                    const total = nearest + CONVENIENCE_CHARGE;
+                    $('#totalAmount').val('₱' + total.toFixed(2));
+                } else if (!isNaN(amount) && amount >= maxAmount) {
+                    const total = amount + CONVENIENCE_CHARGE;
+                    $('#totalAmount').val('₱' + total.toFixed(2));
+                } else {
+                    $('#totalAmount').val('');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
