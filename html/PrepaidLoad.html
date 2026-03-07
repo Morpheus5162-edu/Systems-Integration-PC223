@@ -26,13 +26,40 @@
                     </select>
                 </div>
 
-                <div class="mb-3" id="loadAmountSection" style="display: none;">
-                    <label class="form-label">Load Amount:</label>
-                    <div id="loadOptions"></div>
-                    <input type="number" id="otherAmount" class="form-control mt-2" placeholder="Enter custom amount" disabled>
+                <div class="mb-3">
+                    <label class="form-label">Load Type:</label>
+                    <ul class="nav nav-tabs mb-3" id="loadTypeTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="loadAmount-tab" data-bs-toggle="tab" data-bs-target="#loadAmount-pane" type="button" role="tab" aria-controls="loadAmount-pane" aria-selected="true">Load Amount</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="data-tab" data-bs-toggle="tab" data-bs-target="#data-pane" type="button" role="tab" aria-controls="data-pane" aria-selected="false">Data</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="dataUnli-tab" data-bs-toggle="tab" data-bs-target="#dataUnli-pane" type="button" role="tab" aria-controls="dataUnli-pane" aria-selected="false">Data + Unli Call & Text</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="unliDataUnli-tab" data-bs-toggle="tab" data-bs-target="#unliDataUnli-pane" type="button" role="tab" aria-controls="unliDataUnli-pane" aria-selected="false">Unli Data + Unli Call & Text</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="loadTypeTabContent">
+                        <div class="tab-pane fade show active" id="loadAmount-pane" role="tabpanel" aria-labelledby="loadAmount-tab">
+                            <div id="loadOptions"></div>
+                            <input type="number" id="otherAmount" class="form-control mt-2" placeholder="Enter custom amount" disabled style="display:none;">
+                        </div>
+                        <div class="tab-pane fade" id="data-pane" role="tabpanel" aria-labelledby="data-tab">
+                            <div id="dataOptions"></div>
+                        </div>
+                        <div class="tab-pane fade" id="dataUnli-pane" role="tabpanel" aria-labelledby="dataUnli-tab">
+                            <div id="dataUnliOptions"></div>
+                        </div>
+                        <div class="tab-pane fade" id="unliDataUnli-pane" role="tabpanel" aria-labelledby="unliDataUnli-tab">
+                            <div id="unliDataUnliOptions"></div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="mb-3" id="totalAmountSection" style="display: none;">
+                <div class="mb-3">
                     <label for="totalAmount" class="form-label">Total Amount:</label>
                     <input type="text" id="totalAmount" class="form-control" readonly>
                 </div>
