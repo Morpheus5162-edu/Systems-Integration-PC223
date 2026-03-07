@@ -1,10 +1,9 @@
 const loadAmounts = {
-    smart: [50, 100, 200, 500],
-    globe: [55, 110, 220, 550],
-    dito: [50, 100, 200, 500],
-    tnt: [50, 100, 200, 500],
-    tm: [50, 100, 200, 500],
-    gomo: [99, 199, 499, 999]
+    smart: [50, 100, 200, 300, 500, 1000],
+    globe: [20, 30, 50, 100, 200, 500, 600, 900],
+    dito: [50, 100, 150, 200, 300, 500, 750, 850, 1000],
+    tnt: [50, 100, 200, 300, 500, 1000],
+    tm: [20, 30, 50, 100, 200, 500, 600, 900]
 };
 
 const CONVENIENCE_CHARGE = 2.50;
@@ -18,6 +17,8 @@ $(document).ready(function() {
         $('#totalAmount').val('');
 
         if (provider) {
+            $('#loadAmountSection').show();
+            $('#totalAmountSection').show();
             loadAmounts[provider].forEach(amount => {
                 loadOptions.append(`
                     <div class="form-check">
@@ -32,6 +33,9 @@ $(document).ready(function() {
                     <label class="form-check-label" for="load_other">Others</label>
                 </div>
             `);
+        } else {
+            $('#loadAmountSection').hide();
+            $('#totalAmountSection').hide();
         }
     });
 
