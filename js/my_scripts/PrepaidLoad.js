@@ -1,50 +1,58 @@
+// RegularLoadOffer class to eliminate repetition of default expiry value (365 days)
+class RegularLoadOffer {
+    constructor(amount, expiry = 365) {
+        this.amount = amount;
+        this.expiry = expiry;
+    }
+}
+
 const loadAmounts = {
     smart: [
-        { amount: 50, expiry: 365 },
-        { amount: 100, expiry: 365 },
-        { amount: 200, expiry: 365 },
-        { amount: 300, expiry: 365 },
-        { amount: 500, expiry: 365 },
-        { amount: 1000, expiry: 365 }
+        new RegularLoadOffer(50),
+        new RegularLoadOffer(100),
+        new RegularLoadOffer(200),
+        new RegularLoadOffer(300),
+        new RegularLoadOffer(500),
+        new RegularLoadOffer(1000)
     ],
     globe: [
-        { amount: 20, expiry: 365 },
-        { amount: 30, expiry: 365 },
-        { amount: 50, expiry: 365 },
-        { amount: 100, expiry: 365 },
-        { amount: 200, expiry: 365 },
-        { amount: 500, expiry: 365 },
-        { amount: 600, expiry: 365 },
-        { amount: 900, expiry: 365 }
+        new RegularLoadOffer(20),
+        new RegularLoadOffer(30),
+        new RegularLoadOffer(50),
+        new RegularLoadOffer(100),
+        new RegularLoadOffer(200),
+        new RegularLoadOffer(500),
+        new RegularLoadOffer(600),
+        new RegularLoadOffer(900)
     ],
     dito: [
-        { amount: 50, expiry: 365 },
-        { amount: 100, expiry: 365 },
-        { amount: 150, expiry: 365 },
-        { amount: 200, expiry: 365 },
-        { amount: 300, expiry: 365 },
-        { amount: 500, expiry: 365 },
-        { amount: 750, expiry: 365 },
-        { amount: 850, expiry: 365 },
-        { amount: 1000, expiry: 365 }
+        new RegularLoadOffer(50),
+        new RegularLoadOffer(100),
+        new RegularLoadOffer(150),
+        new RegularLoadOffer(200),
+        new RegularLoadOffer(300),
+        new RegularLoadOffer(500),
+        new RegularLoadOffer(750),
+        new RegularLoadOffer(850),
+        new RegularLoadOffer(1000)
     ],
     tnt: [
-        { amount: 50, expiry: 365 },
-        { amount: 100, expiry: 365 },
-        { amount: 200, expiry: 365 },
-        { amount: 300, expiry: 365 },
-        { amount: 500, expiry: 365 },
-        { amount: 1000, expiry: 365 }
+        new RegularLoadOffer(50),
+        new RegularLoadOffer(100),
+        new RegularLoadOffer(200),
+        new RegularLoadOffer(300),
+        new RegularLoadOffer(500),
+        new RegularLoadOffer(1000)
     ],
     tm: [
-        { amount: 20, expiry: 365 },
-        { amount: 30, expiry: 365 },
-        { amount: 50, expiry: 365 },
-        { amount: 100, expiry: 365 },
-        { amount: 200, expiry: 365 },
-        { amount: 500, expiry: 365 },
-        { amount: 600, expiry: 365 },
-        { amount: 900, expiry: 365 }
+        new RegularLoadOffer(20),
+        new RegularLoadOffer(30),
+        new RegularLoadOffer(50),
+        new RegularLoadOffer(100),
+        new RegularLoadOffer(200),
+        new RegularLoadOffer(500),
+        new RegularLoadOffer(600),
+        new RegularLoadOffer(900)
     ]
 };
 
